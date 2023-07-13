@@ -1,6 +1,9 @@
 #  Ignore virtual environment
 project
 
+#  Ignore Jupyter notebook with private SQL connection string contained in it
+wells-exploration.ipynb
+
 
 #####  .gitignore configuration from github
 # Byte-compiled / optimized / DLL files
