@@ -9,7 +9,7 @@ def query_db(min_depth, min_gradient):
     engine = create_engine(WELLS_URL)
     
     query = text(
-            """SELECT latitude, longitude, gradient
+            """SELECT latitude, longitude, depth, gradient
             FROM wells
             WHERE depth > :min_depth AND gradient > :min_gradient
             """
