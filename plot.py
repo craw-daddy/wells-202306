@@ -1,6 +1,7 @@
-from vega_datasets import data
 import altair as alt
 import pandas as pd
+
+from vega_datasets import data
 
 def plot_wells(well_coords):
     #  Create the US map

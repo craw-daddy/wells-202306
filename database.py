@@ -1,5 +1,6 @@
-from sqlalchemy import create_engine, text
 import os
+
+from sqlalchemy import create_engine, text
 
 WELLS_URL = os.getenv('WELLS_URL')
 
