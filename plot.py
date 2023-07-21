@@ -3,7 +3,11 @@ import pandas as pd
 
 from vega_datasets import data
 
-def plot_wells(well_coords):
+def plot_wells(well_file):
+    """Assumes that the well_file input is a string that points to a local
+       JSON file that has the information that Altair needs to map
+       the wells.
+    """
     #  Create the US map
     states = alt.topo_feature(data.us_10m.url, feature='states')
     USmap = (alt.Chart(states)
@@ -13,16 +17,14 @@ def plot_wells(well_coords):
             )
 
     #  Add the wells information to map
-    columns = ['latitude', 'longitude', 'depth', 'gradient']
-    well_coords = pd.DataFrame(well_coords, columns=columns)
-    well_coordinates = (alt.Chart(well_coords)
+    well_coordinates = (alt.Chart(well_file)
                         .mark_circle()
-                        .encode(latitude='latitude',
-                                longitude='longitude',
-                                color=alt.Color('gradient', title='Gradient',
+                        .encode(latitude='latitude:Q',
+                                longitude='longitude:Q',
+                                color=alt.Color('gradient:Q', title='Gradient',
                                                scale=alt.Scale(scheme='inferno')),
-                                tooltip=[alt.Tooltip('depth', title='Depth (m)'),
-                                         alt.Tooltip('gradient', title='Gradient (°C/m)',
+                                tooltip=[alt.Tooltip('depth:Q', title='Depth (m)'),
+                                         alt.Tooltip('gradient:Q', title='Gradient (°C/m)',
                                                     format='0.2f')])
                        )
 

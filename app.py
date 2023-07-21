@@ -12,10 +12,17 @@ def app():
     gradient = st.number_input('Min gradient (°C/m):', 0.0, 0.150, value=0.010, step=0.005)
 
     data = query_db(depth, gradient)
+
+    #  Print a message if the query was too restrictive
     if len(data) == 0:
         st.write('Your query returned no results, please try again!')
+    #  Otherwise let's plot the wells.  Here we are accounting for the fact that
+    #  the input might be very large by writing the data to a file, and the
+    #  plot_wells method is expecting to receive a filename as input.  
     else:
-        st.write(plot_wells(data))
+        filename = 'wells_data.json'
+        data.to_json(filename, orient='records')
+        st.write(plot_wells(filename))
 
 if __name__ == '__main__':
     app()

@@ -4,6 +4,8 @@ project
 #  Ignore Jupyter notebook with private SQL connection string contained in it
 wells-exploration.ipynb
 
+#  Ignore the well coordinates file created during the application itself
+wells_data.json
 
 #####  .gitignore configuration from github
 # Byte-compiled / optimized / DLL files
